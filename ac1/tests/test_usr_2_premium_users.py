@@ -1,5 +1,6 @@
 from app.game_plat import CoursePlatform
 
+
 def testIdUsers():
     platform = CoursePlatform()
     platform.RegisterUser(plan='Premium')
