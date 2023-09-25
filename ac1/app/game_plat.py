@@ -74,10 +74,3 @@ class CoursePlatform:
 
         return False
 
-
-if __name__ == '__main__':
-    platform = CoursePlatform()
-    platform.RegisterUser(plan='Premium')
-    platform.RegisterUser()
-    platform.RegisterUser(plan='Premium')
-    platform.FindPremiumUsers()

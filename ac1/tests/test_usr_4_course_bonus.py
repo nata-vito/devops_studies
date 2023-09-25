@@ -1,7 +1,7 @@
 from app.game_plat import CoursePlatform
 
 
-def testScoreToCourse():
+def testPassScoreToCourse():
     platform = CoursePlatform()
     platform.RegisterUser()
     platform.RegisterUser()
