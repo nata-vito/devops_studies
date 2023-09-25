@@ -36,7 +36,7 @@ coverage report
 coverage html
 ```
 
-Para os testes do GitActions passarem e o build dar certo, bast apagar os testes fail, mas tenha em mente que a sua cobertura não será de 100% da aplicação ao rodar o Coverage.
+Para a cobertura do Covarege ficar em 100%, basta descomentar os testes fail, mas tenha em mente que a sua o build do GitHub Actions falhará.
 
 ## 🤝 Collaborators
 
