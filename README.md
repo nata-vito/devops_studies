@@ -36,6 +36,8 @@ coverage report
 coverage html
 ```
 
+Para os testes do GitActions passarem e o build dar certo, bast apagar os testes fail, mas tenha em mente que a sua cobertura não será de 100% da aplicação ao rodar o Coverage.
+
 ## 🤝 Collaborators
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
@@ -52,9 +54,5 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     </td>
   </tr>
 </table>
-
-## 📝 License
-
-This project is under license. See the file [LICENSE](LICENSE) for more details.
 
 ---
