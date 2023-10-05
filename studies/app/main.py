@@ -79,15 +79,16 @@ class Contratar:
         self.idade = idade
         self.tipo_contrato = None
     
+    # GRAFO DE FLUXO
     def ContratarPessoa(self):
-        if self.idade < 16:
-            return False
-        elif self.idade >= 16 and self.idade < 18:
+        if self.idade < 16: #1
+            return False #2
+        elif self.idade >= 16 and self.idade < 18: #3
             self.tipo_contrato = 'Meio Periodo'
-            return True
-        elif self.idade >= 18 and self.idade <= 55:
-            self.tipo_contrato = 'integral'
-            return True
-        elif self.idade > 55:
-            return False
+            return True #4
+        elif self.idade >= 18 and self.idade <= 55: #5
+            self.tipo_contrato = 'integral' 
+            return True #6
+        elif self.idade > 55: #7
+            return False #8
         
