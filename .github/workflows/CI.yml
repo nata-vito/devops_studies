@@ -4,12 +4,12 @@ on:
   pull_request:
   push:
     branches:
-      - 'master'
+      - "main"
 
 jobs:
-  hello_world_job:
+  test:
+    name: Run tests & display coverage
     runs-on: ubuntu-latest
-    name: Check coverage
     permissions:
       # Gives the action the necessary permissions for publishing new
       # comments in pull requests.
@@ -19,19 +19,10 @@ jobs:
       # comments (to avoid publishing multiple comments in the same PR)
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        id: setup-python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3
-
-      - name: Install deps
-        run: pip install -r studies/requirements.txt
-
-      - name: Launch tests & generate report
-        run: pytest
+      - name: Install everything, run the tests, produce the .coverage file
+        run: make test # This is the part where you put your own test command
 
       - name: Coverage comment
         id: coverage_comment
