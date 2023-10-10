@@ -3,38 +3,60 @@ name: CI
 on:
   pull_request:
   push:
-    branches:
-      - "main"
+    branches: [main]
+
+concurrency:
+  group: ${{ github.event_name }}-${{ github.ref }}
 
 jobs:
   test:
     name: Run tests & display coverage
     runs-on: ubuntu-latest
     permissions:
-      # Gives the action the necessary permissions for publishing new
-      # comments in pull requests.
       pull-requests: write
-      # Gives the action the necessary permissions for pushing data to the
-      # python-coverage-comment-action branch, and for editing existing
-      # comments (to avoid publishing multiple comments in the same PR)
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install everything, run the tests, produce the .coverage file
-        run: make test # This is the part where you put your own test command
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        run: |
+          pipx install poetry --python=python3.11
+
+      - name: Poetry caches
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/
+          key: ${{ hashFiles('poetry.lock') }}
+
+      - name: Install deps
+        run: poetry install
+
+      - name: Run tests
+        run: poetry run pytest
+        env:
+          COVERAGE_COMMENT_E2E_GITHUB_TOKEN_USER_1: ${{ secrets.COVERAGE_COMMENT_E2E_GITHUB_TOKEN_USER_1 }}
+          COVERAGE_COMMENT_E2E_GITHUB_TOKEN_USER_2: ${{ secrets.COVERAGE_COMMENT_E2E_GITHUB_TOKEN_USER_2 }}
+          COVERAGE_COMMENT_E2E_ACTION_REF: ${{ github.sha }}
+          COVERAGE_COMMENT_E2E_REPO_SUFFIX: ${{ github.event.number }}
+          COVERAGE_COMMENT_E2E_PR_AUTHOR: ${{ github.event.pull_request.user.login }}
 
       - name: Coverage comment
         id: coverage_comment
-        uses: py-cov-action/python-coverage-comment-action@v3
+        uses: py-cov-action/python-coverage-comment-action@main
         with:
           GITHUB_TOKEN: ${{ github.token }}
+          ANNOTATE_MISSING_LINES: true
 
       - name: Store Pull Request comment to be posted
         uses: actions/upload-artifact@v3
         if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
         with:
-          # If you use a different name, update COMMENT_ARTIFACT_NAME accordingly
           name: python-coverage-comment-action
-          # If you use a different name, update COMMENT_FILENAME accordingly
           path: python-coverage-comment-action.txt
