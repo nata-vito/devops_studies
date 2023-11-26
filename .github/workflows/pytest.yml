@@ -30,7 +30,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build the Docker image
       run: |
-        cd fastapi-crud && docker-compose up -d --build
-    - name: Run API docker image
-      run: |
-        docker-compose exec web pytest .
+        cd fastapi-crud && docker-compose up -d --build && docker-compose exec web pytest .
