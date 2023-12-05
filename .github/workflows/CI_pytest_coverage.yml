@@ -31,6 +31,6 @@ jobs:
         pip install flake8 pytest pylint
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Tests and covarage
+    - name: Tests and coverage
       run: |
         cd studies/ && coverage run --source=./ -m pytest -v tests && coverage report
