@@ -31,5 +31,4 @@ jobs:
            REPOSITORY: docker-deploy
            IMAGE_TAG: ${{ github.sha }}
         run: |
-         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+         docker pull natavito/crudapi:dev
