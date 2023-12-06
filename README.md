@@ -1,6 +1,6 @@
 # DevOps Studies
 
-Neste repositório, aplico alguns estudo sobre devops utilizando Python como linguagem principal. Utilizo as blibliotecas Pytest para realizar testes, a Covarege que extrair metricas sobre a cobertura dos meus testes em relação a aplicação e autoções com o GitActions para build do pacote e testes automatizados. Sinta-se livre para colaborar com o projeto!
+Neste repositório, aplico alguns estudos sobre devops utilizando Python como linguagem principal. Utilizo as blibliotecas Pytest para realizar testes, a Coverage que extrair metricas sobre a cobertura dos meus testes em relação a aplicação e automações com o GitActions para build do pacote e testes automatizados. Sinta-se livre para colaborar com o projeto!
 
 ---
 ### Pre-requisitos
